@@ -90,8 +90,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .placeOptions(PlaceOptions.builder()
                                 .backgroundColor(Color.parseColor("#EEEEEE"))
                                 .limit(10)
-                                .addInjectedFeature(home)
-                                .addInjectedFeature(work)
                                 .build(PlaceOptions.MODE_CARDS))
                         .build(MainActivity.this);
                 startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
