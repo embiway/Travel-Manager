@@ -51,7 +51,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
  * automatically makes geocoding requests, has built-in saved locations, includes location picker functionality,
  * and adds beautiful UI into your Android project.
  */
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {//
 
     private static String USGS_REQUEST_URL =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=19.0760,72.8777&radius=1500&type=food,restaurant&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
