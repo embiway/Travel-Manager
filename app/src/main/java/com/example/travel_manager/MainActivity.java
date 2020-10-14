@@ -3,8 +3,11 @@ package com.example.travel_manager;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +29,20 @@ import com.mapbox.mapboxsdk.plugins.places.autocomplete.model.PlaceOptions;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 
@@ -36,6 +53,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
  */
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private static String USGS_REQUEST_URL =
+            "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=19.0760,72.8777&radius=1500&type=food,restaurant&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
     private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
     private MapView mapView;
     private MapboxMap mapboxMap;
@@ -43,14 +62,25 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private CarmenFeature work;
     private String geojsonSourceLayerId = "geojsonSourceLayerId";
     private String symbolIconId = "symbolIconId";
-
+     private  LatLng latLing ;
+    double latitude;
+    double longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String datas = extras.getString("CITY_NAME");
+            if (datas != null) {
+                //Toast.makeText(this, datas, Toast.LENGTH_SHORT).show();
+                //Log.i("sdv",datas);
+
+            }
+        }
+            Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_main);
@@ -131,14 +161,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     // Move map camera to the selected location
                     mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
-                                    .target(new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
+                                    .target( latLing =new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),
                                             ((Point) selectedCarmenFeature.geometry()).longitude()))
                                     .zoom(14)
                                     .build()), 4000);
+                    latitude = latLing.getLatitude();
+                    longitude = latLing.getLongitude();
+                    //        double latitude  = latLing.getAltitude();
+//        double longitude = latLing.getLongitude();
+      Log.i("geocordinates",Double.toString(latitude)+"   "+Double.toString(longitude));
+      String Location = Double.toString(latitude)+","+Double.toString(longitude);
+                    USGS_REQUEST_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location="+Location+"&radius=1500&type=food,restaurant&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
+                    Intent intent = new Intent(this , MenuActivity.class);
+                    intent.putExtra("USGS_REQUEST_URL", USGS_REQUEST_URL);
+                    startActivity(intent);
                 }
             }
         }
     }
+
+
+
 
     // Add the mapView lifecycle to the activity's lifecycle methods
     @Override
