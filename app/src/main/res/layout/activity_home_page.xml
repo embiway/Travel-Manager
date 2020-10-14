@@ -4,15 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".HomePage">
 
+    <EditText
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_weight="1"
+        android:textColor="@color/colorPrimaryDark" />
+        />
     <Button
         android:id="@+id/button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="2dp"
+        android:layout_weight="1"
+        android:onClick="openMapActivity"
         android:text="Open Maps"
-        android:gravity="center"
-        tools:layout_editor_absoluteX="166dp"
-        tools:layout_editor_absoluteY="321dp"
-        android:onClick="openMapActivity"/>
+         />
 </LinearLayout>
