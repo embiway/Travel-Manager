@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
@@ -30,10 +32,12 @@ public class TourismPlaceAdapter  extends ArrayAdapter<TourismPlace>{
         // Lookup view for data population
         TextView Name = (TextView) convertView.findViewById(R.id.Name);
         TextView Vicinity = (TextView) convertView.findViewById(R.id.Vicinity);
+        ImageView icon  = (ImageView)convertView.findViewById(R.id.Icon);
         // Populate the data into the template view using the data object
 
         Name.setText(user.name);
         Vicinity.setText(user.vicinity);
+        Picasso.get().load(user.icon).into(icon);
         // Return the completed view to render on screen
         return convertView;
     }

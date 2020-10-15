@@ -5,6 +5,14 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/Icon"
+            android:layout_width="50dp"
+            android:layout_height="121dp"
+            android:layout_weight="1"
+            android:text="Name"
+            android:textColor="@color/colorPrimaryDark" />
+
         <TextView
             android:id="@+id/Name"
             android:layout_height="wrap_content"

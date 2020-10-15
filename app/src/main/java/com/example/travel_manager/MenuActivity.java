@@ -36,6 +36,8 @@ public class MenuActivity extends AppCompatActivity {
     private Button mytrip;
     private static  String USGS_REQUEST_URL =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=19.0760,72.8777&radius=1500&type=food,restaurant&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
+    Double latitude;
+    Double longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +49,7 @@ public class MenuActivity extends AppCompatActivity {
         }
         listView = (ListView) findViewById(R.id.listview);
         ArrayList<TourismPlace> list = new ArrayList<TourismPlace>();
-      //  Toast.makeText(this, Integer.toString(list.size()), Toast.LENGTH_SHORT).show();
+        //  Toast.makeText(this, Integer.toString(list.size()), Toast.LENGTH_SHORT).show();
 //        TourismPlace u1 = new TourismPlace("icon","Delhi","near taj hotel","https://developers.google.com/places/web-service/supported_types#table2");
 //        TourismPlace u2 = new TourismPlace("icon","Mumbai","near taj hotel","https://developers.google.com/places/web-service/supported_types#table2");
 //        list.add(u1);
@@ -55,24 +57,29 @@ public class MenuActivity extends AppCompatActivity {
 
         TourismPlaceAdapter adapter = new TourismPlaceAdapter(this,list);
         listView.setAdapter(adapter);
-         mytrip.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 Intent intent=new Intent(MenuActivity.this,MyTrip.class);
-                 intent.putExtra("list", list);
-                   startActivity(intent);
-             }
-         });
+        mytrip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MenuActivity.this,MyTrip.class);
+                intent.putExtra("list", list);
+                startActivity(intent);
+            }
+        });
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TourismPlace selectedItem = (TourismPlace) parent.getItemAtPosition(position);
                 // listview.setText("The best football player is : " + selectedItem);
-                String str = selectedItem.photoUrl;
-                Intent httpIntent = new Intent(Intent.ACTION_VIEW);
-                httpIntent.setData(Uri.parse(str));
-                startActivity(httpIntent);
+                String str = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+selectedItem.photoUrl+"&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
+//                Intent httpIntent = new Intent(Intent.ACTION_VIEW);
+//                httpIntent.setData(Uri.parse(str));
+//                startActivity(httpIntent);
+                Intent intent = new Intent(MenuActivity.this , PlaceImageActivity.class);
+                intent.putExtra("photoUrl", str);
+                intent.putExtra("latitude",selectedItem.latitude);
+                intent.putExtra("longitude",selectedItem.longitude);
+                startActivity(intent);
             }
 
         });
@@ -214,8 +221,15 @@ public class MenuActivity extends AppCompatActivity {
                     String name = object.getString("name");
                     String icon = object.getString("icon");
                     String vicinity = object.getString("vicinity");
-                    String photourl = "NA";
-                    TourismPlace x = new TourismPlace(icon, name, vicinity, photourl);
+                    JSONArray PhotoArray = object.getJSONArray("photos");
+                    JSONObject PhotoObj = PhotoArray.getJSONObject(0);
+                    String url = PhotoObj.getString("photo_reference");
+                    JSONObject geometryObject = object.getJSONObject("geometry");
+                    JSONObject locationObject = geometryObject.getJSONObject("location");
+                    Double latitude,longitude;
+                    latitude = locationObject.getDouble("lat");
+                    longitude = locationObject.getDouble("lng");
+                    TourismPlace x = new TourismPlace(icon, name, vicinity, url,latitude,longitude);
                     tourismPlaces.add(x);
                 }
             }catch (JSONException e) {
