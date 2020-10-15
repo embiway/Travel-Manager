@@ -1,13 +1,13 @@
 package com.example.travel_manager;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class HomePage extends AppCompatActivity {
 
@@ -23,6 +23,7 @@ public class HomePage extends AppCompatActivity {
     public void openMapActivity(View view){
         String city = String.valueOf(text.getText());
         city = city.toLowerCase();
+        Log.d("OpenMap" , "MAp opened");
         Intent intent = new Intent(this , MainActivity.class);
         intent.putExtra("CITY_NAME", city);
         startActivity(intent);

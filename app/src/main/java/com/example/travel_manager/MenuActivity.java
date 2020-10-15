@@ -8,11 +8,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.google.gson.JsonArray;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,10 +59,13 @@ public class MenuActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 TourismPlace selectedItem = (TourismPlace) parent.getItemAtPosition(position);
                 // listview.setText("The best football player is : " + selectedItem);
-                String str = selectedItem.photoUrl;
-                Intent httpIntent = new Intent(Intent.ACTION_VIEW);
-                httpIntent.setData(Uri.parse(str));
-                startActivity(httpIntent);
+                String str = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+selectedItem.photoUrl+"&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
+//                Intent httpIntent = new Intent(Intent.ACTION_VIEW);
+//                httpIntent.setData(Uri.parse(str));
+//                startActivity(httpIntent);
+                Intent intent = new Intent(MenuActivity.this , PlaceImageandInfo.class);
+                intent.putExtra("photoUrl", str);
+                startActivity(intent);
             }
 
         });
@@ -201,8 +207,10 @@ public class MenuActivity extends AppCompatActivity {
                     String name = object.getString("name");
                     String icon = object.getString("icon");
                     String vicinity = object.getString("vicinity");
-                    String photourl = "NA";
-                    TourismPlace x = new TourismPlace(icon, name, vicinity, photourl);
+                    JSONArray PhotoArray = object.getJSONArray("photos");
+                    JSONObject PhotoObj = PhotoArray.getJSONObject(0);
+                    String url = PhotoObj.getString("photo_reference");
+                    TourismPlace x = new TourismPlace(icon, name, vicinity, url);
                     tourismPlaces.add(x);
                 }
             }catch (JSONException e) {
