@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
      private  LatLng latLing ;
     double latitude;
     double longitude;
+    private static  final String TAG="MainActivity";
+     private  static  final int ERROR_DIALOG_REQUEST=9001; 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

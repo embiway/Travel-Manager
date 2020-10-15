@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Travel-Manager</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiZW1iaXdheSIsImEiOiJja2cwdDJjNjkwZzd5MnFvMnZybjVpbzdqIn0.0d2HQx4in0GuZTUWMpVrvw</string>
+    <string name="google_maps_API_Key">AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0</string>
 </resources>

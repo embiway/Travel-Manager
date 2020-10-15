@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,12 +33,14 @@ import java.util.ArrayList;
 public class MenuActivity extends AppCompatActivity {
 
     ListView listView;
+    private Button mytrip;
     private static  String USGS_REQUEST_URL =
             "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=19.0760,72.8777&radius=1500&type=food,restaurant&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        mytrip=findViewById(R.id.mytrip);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             USGS_REQUEST_URL = extras.getString("USGS_REQUEST_URL");
@@ -51,6 +55,15 @@ public class MenuActivity extends AppCompatActivity {
 
         TourismPlaceAdapter adapter = new TourismPlaceAdapter(this,list);
         listView.setAdapter(adapter);
+         mytrip.setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent=new Intent(MenuActivity.this,MyTrip.class);
+                 intent.putExtra("list", list);
+                   startActivity(intent);
+             }
+         });
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
