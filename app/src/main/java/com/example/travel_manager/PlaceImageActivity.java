@@ -2,11 +2,15 @@ package com.example.travel_manager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class PlaceImageActivity extends AppCompatActivity {
@@ -15,6 +19,9 @@ public class PlaceImageActivity extends AppCompatActivity {
     ImageView imageView;
     Double latitude;
     Double longitude;
+    private FirebaseAuth auth;
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +36,15 @@ public class PlaceImageActivity extends AppCompatActivity {
         //imageView.setImageResource(R.drawable.ic_launcher_background);
         Picasso.get().load(photourl).into(imageView);
         Toast.makeText(this, Double.toString(latitude)  +" "+ Double.toString(longitude), Toast.LENGTH_SHORT).show();
+        auth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("Trip");
     }
     public  void openMapActivity(View view)
     {
-//        Intent intent = new Intent(PlaceImageandInfo.this , RedirectionActivity.class);
-//        intent.putExtra("latitude",latitude);
-//        intent.putExtra("longitude",longitude);
-//        startActivity(intent);
+        // auth.getUid();
+        startActivity(new Intent(PlaceImageActivity.this,AddnewTripActivity.class));
+
     }
 
 

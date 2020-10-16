@@ -5,12 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-      android:text="MyTrip"
-        android:id="@+id/mytrip"
-        android:layout_marginTop="10dp"/>
 
     <ListView
         android:id="@+id/listview"
@@ -18,11 +12,5 @@
         android:layout_height="555dp"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="profiesetting"
-        android:id="@+id/save"
-        android:layout_marginTop="50dp"/>
 
 </RelativeLayout>
