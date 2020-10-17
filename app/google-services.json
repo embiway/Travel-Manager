@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "228259942578",
+    "firebase_url": "https://travel-manager-ea946.firebaseio.com",
+    "project_id": "travel-manager-ea946",
+    "storage_bucket": "travel-manager-ea946.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:228259942578:android:fcc4c73ef11a134bc5f9ab",
+        "android_client_info": {
+          "package_name": "com.example.travel_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "228259942578-0utqm2qgk5c2j251ijvkgpip4q98rqr2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqmxXQo6-2DB60ShqSrg58cznwg6vbAmU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "228259942578-0utqm2qgk5c2j251ijvkgpip4q98rqr2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
