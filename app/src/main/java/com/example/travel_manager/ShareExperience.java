@@ -66,7 +66,7 @@ public class ShareExperience extends AppCompatActivity {
         uid = auth.getUid().toString();
         databaseReference = firebaseDatabase.getReference().child("messages");
         firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference().child("photo");
+        storageReference = firebaseStorage.getReference().child("photomessage");
         // Initialize references to views
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mMessageListView = (ListView) findViewById(R.id.messageListView);

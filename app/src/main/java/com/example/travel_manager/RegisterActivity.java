@@ -16,9 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class RegisterActivity extends AppCompatActivity {
     private EditText email,password;
-    private Button register;
+    private FancyButton register;
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
