@@ -19,6 +19,13 @@
         android:id="@+id/view"
         android:layout_below="@+id/add"
         android:layout_marginTop="100dp"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Shatre-Experience"
+        android:id="@+id/share"
+        android:layout_below="@+id/view"
+        android:layout_marginTop="100dp"/>
 
 
 </RelativeLayout>

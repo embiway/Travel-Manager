@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class MyTrip extends AppCompatActivity {
-  private Button add,view;
+  private Button add,view,share;
     private FirebaseAuth auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,7 @@ public class MyTrip extends AppCompatActivity {
         setContentView(R.layout.activity_my_trip);
          add=findViewById(R.id.add);
           view=findViewById(R.id.view);
+          share =(Button) findViewById(R.id.share);
           auth = FirebaseAuth.getInstance();
 //            Log.i("cdsfdregr" ,auth.getCurrentUser().getEmail().toString());
 //        ArrayList<TourismPlace> adapter = (ArrayList<TourismPlace>) getIntent().getSerializableExtra("list");
@@ -53,6 +54,12 @@ public class MyTrip extends AppCompatActivity {
               @Override
               public void onClick(View v) {
                   startActivity(new Intent(MyTrip.this,AddnewTripActivity.class));
+              }
+          });
+          share.setOnClickListener(new View.OnClickListener() {
+              @Override
+              public void onClick(View v) {
+                  startActivity(new Intent(MyTrip.this,ShareExperience.class));
               }
           });
 
