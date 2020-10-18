@@ -12,7 +12,7 @@ import com.google.android.gms.location.places.Place;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
+//Adapter corresponding to trip_Info class object used to show  TripHistory in TripHistoryActivity
 public class Trip_InfoAdapter  extends ArrayAdapter<trip_info> {
 
     public  Trip_InfoAdapter(Context context, ArrayList<trip_info> users) {

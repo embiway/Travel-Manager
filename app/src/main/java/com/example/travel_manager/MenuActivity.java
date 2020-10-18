@@ -44,7 +44,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-
+// This activity  used Api and  networking related code to download info about tourism place at particular city searched by user , and display these details back to user
 public class MenuActivity extends AppCompatActivity {
 
     ListView listView;

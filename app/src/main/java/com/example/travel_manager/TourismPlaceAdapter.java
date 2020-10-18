@@ -14,7 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import static java.security.AccessController.getContext;
-
+//CustomList Adapter corresponding to tourism class object used to  show MenuActivity lisitems
 public class TourismPlaceAdapter  extends ArrayAdapter<TourismPlace>{
 
     public  TourismPlaceAdapter(Context context, ArrayList<TourismPlace> users) {

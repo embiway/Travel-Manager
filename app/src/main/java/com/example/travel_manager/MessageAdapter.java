@@ -10,7 +10,7 @@ package com.example.travel_manager;
         import com.bumptech.glide.Glide;
 
         import java.util.List;
-
+// This is CustomList adapter corresponding to Messages class object  which  can hold either an image or text.ShareExperienceActivity is the place where  messages are shown
 public class MessageAdapter extends ArrayAdapter<Messages> {
     public MessageAdapter(Context context, int resource, List<Messages> objects) {
         super(context, resource, objects);

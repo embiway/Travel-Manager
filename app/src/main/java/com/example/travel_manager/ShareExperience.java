@@ -35,6 +35,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
+// This activity is a chatting activity where user can send image and text to show off their  trip  experiences.
 
 public class ShareExperience extends AppCompatActivity {
 

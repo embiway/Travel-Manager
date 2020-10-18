@@ -1,5 +1,6 @@
 package com.example.travel_manager;
 
+// this object holds info of  profile
 public class profile {
    public String name;
     public String  description;
