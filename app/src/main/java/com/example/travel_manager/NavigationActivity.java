@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+// Not implemented yet work in progress
 public class NavigationActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;

@@ -15,7 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-
+//Activity used to show Trips done by user
 public class TripHistoryActivity extends AppCompatActivity {
 
     ListView listView;

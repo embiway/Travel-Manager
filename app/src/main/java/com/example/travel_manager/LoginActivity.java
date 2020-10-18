@@ -15,7 +15,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import mehdi.sakout.fancybuttons.FancyButton;
-
+//Login page
 public class LoginActivity extends AppCompatActivity {
     private EditText email,password;
     private FancyButton login;

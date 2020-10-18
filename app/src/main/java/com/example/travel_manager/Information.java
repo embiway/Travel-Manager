@@ -1,5 +1,6 @@
 package com.example.travel_manager;
 
+//not implemented
 public class Information {
     private  String place;
 

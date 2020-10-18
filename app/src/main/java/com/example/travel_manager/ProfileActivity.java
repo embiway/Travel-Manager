@@ -38,6 +38,7 @@ import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.squareup.picasso.Picasso;
 
+// An Activity used to show profile pic and other details  , used firebase  storage and database to store details/
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView imageView;
@@ -68,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child(uid+"photo");
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference().child("photo");
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        databaseReference.addChildEventListener(new ChildEventListener() {//Listener continuously checking for a change in database and updating the view for user
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
@@ -104,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-    public   void  imageSelect(View view)
+    public   void  imageSelect(View view) // opens an intent to select photo from gallery
     {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
@@ -112,7 +113,7 @@ public class ProfileActivity extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER1);
         Toast.makeText(this, "keep working", Toast.LENGTH_SHORT).show();
     }
-    public  void  savePhoto(View view)
+    public  void  savePhoto(View view) // saves photo back to firebase storage and generated  image url for stored image and stored back in database
     {
         if(image!=null) {
             StorageReference photoref = storageReference.child(uid);

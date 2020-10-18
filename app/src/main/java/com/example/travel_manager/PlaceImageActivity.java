@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
-
+// An Activity Intended to show images of a  tourism place
 public class PlaceImageActivity extends AppCompatActivity {
 
     String photourl;

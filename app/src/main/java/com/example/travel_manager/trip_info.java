@@ -1,5 +1,5 @@
 package com.example.travel_manager;
-
+//object  of  this class  shown in  listView of TripHistoryActivity
 public class trip_info {
 
 

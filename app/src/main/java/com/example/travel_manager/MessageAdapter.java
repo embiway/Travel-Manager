@@ -10,7 +10,8 @@ package com.example.travel_manager;
         import com.bumptech.glide.Glide;
 
         import java.util.List;
-
+// This is CustomList adapter corresponding to Messages class object  which  can hold either an image or text.
+//ShareExperienceActivity is the place where  messages are shown
 public class MessageAdapter extends ArrayAdapter<Messages> {
     public MessageAdapter(Context context, int resource, List<Messages> objects) {
         super(context, resource, objects);
@@ -28,14 +29,14 @@ public class MessageAdapter extends ArrayAdapter<Messages> {
 
         Messages message = getItem(position);
 
-        boolean isPhoto = message.getPhotoUrl() != null;
+        boolean isPhoto = message.getPhotoUrl() != null; // object has photoUrl  image is shown and text part  is set to invisible
         if (isPhoto) {
             messageTextView.setVisibility(View.GONE);
             photoImageView.setVisibility(View.VISIBLE);
             Glide.with(photoImageView.getContext())
                     .load(message.getPhotoUrl())
                     .into(photoImageView);
-        } else {
+        } else {  // if object has  no photourl then text part is shown
             messageTextView.setVisibility(View.VISIBLE);
             photoImageView.setVisibility(View.GONE);
             messageTextView.setText(message.getText());

@@ -1,5 +1,6 @@
 package com.example.travel_manager;
 
+//  object of this class is used to show info of a tourism place in menuActivity
 public class TourismPlace{
     public String icon;
     public String name;

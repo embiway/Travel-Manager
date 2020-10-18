@@ -12,7 +12,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
+//CustomList Adapter corresponding to tourism class object used to  show MenuActivity lisitems
 import static java.security.AccessController.getContext;
 
 public class TourismPlaceAdapter  extends ArrayAdapter<TourismPlace>{

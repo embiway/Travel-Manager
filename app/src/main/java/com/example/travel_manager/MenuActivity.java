@@ -25,7 +25,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-
+// This activity  used Api and  networking related code to download info about tourism place at particular city searched by user , and display these details back to user
 public class MenuActivity extends AppCompatActivity {
 
     ListView listView;
@@ -70,6 +70,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
+        //if we click on any of list item will br  redirected to placeimageactivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -87,7 +88,7 @@ public class MenuActivity extends AppCompatActivity {
             }
 
         });
-        TourAsyncTask task = new TourAsyncTask();
+        TourAsyncTask task = new TourAsyncTask();  // executing asynctask to download  details of city
         task.execute();
     }
     private void updateUi(ArrayList<TourismPlace> list) {
@@ -97,7 +98,7 @@ public class MenuActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         listView.setAdapter(adapter);
     }
-    private class TourAsyncTask extends AsyncTask<URL, String, String> {
+    private class TourAsyncTask extends AsyncTask<URL, String, String> {// TourAsynctask  extending  Asynctask
 
         ProgressDialog progDailog = new ProgressDialog(MenuActivity.this);
         @Override

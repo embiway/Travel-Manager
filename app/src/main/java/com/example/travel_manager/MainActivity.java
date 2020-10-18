@@ -35,6 +35,7 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
  * automatically makes geocoding requests, has built-in saved locations, includes location picker functionality,
  * and adds beautiful UI into your Android project.
  */
+// This actvity uses mapbox sdk  and have features of  navigation and searching new place in map
 public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {//
 
     private static String USGS_REQUEST_URL =

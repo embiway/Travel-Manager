@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+// This activity consists  3 button those are used to add view or share the latest trip experiences.
 public class MyTrip extends AppCompatActivity {
   private Button add,view,share;
     private FirebaseAuth auth;
