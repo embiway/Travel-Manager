@@ -37,7 +37,7 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.squareup.picasso.Picasso;
-
+// An Activity used to show profile pic and other details  , used firebase  storage and database to store details
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView imageView;

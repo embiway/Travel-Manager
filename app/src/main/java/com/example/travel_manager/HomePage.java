@@ -12,7 +12,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import mehdi.sakout.fancybuttons.FancyButton;
-
+/*
+This is the first activity  which starts when our app is used.
+It contain Login and register button
+ */
 public class HomePage extends AppCompatActivity {
 
 

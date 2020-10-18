@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-
+//object holds details of images at a place
 public class PlaceImageandInfo extends AppCompatActivity {
 
     String photourl;
