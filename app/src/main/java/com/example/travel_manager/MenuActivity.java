@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 // <<<<<<< tripupdate
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 // =======
 // import android.app.Activity;
 // import android.app.ProgressDialog;
@@ -72,7 +74,7 @@ public class MenuActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listview);
         ArrayList<TourismPlace> list = new ArrayList<TourismPlace>();
 // <<<<<<< tripupdate
-        //  Toast.makeText(this, Integer.toString(list.size()), Toast.LENGTH_SHORT).show();
+          Toast.makeText(this, Integer.toString(list.size()), Toast.LENGTH_SHORT).show();
 // =======
 //       //  Toast.makeText(this, Integer.toString(list.size()), Toast.LENGTH_SHORT).show();
 // >>>>>>> master
@@ -108,9 +110,9 @@ public class MenuActivity extends AppCompatActivity {
                 TourismPlace selectedItem = (TourismPlace) parent.getItemAtPosition(position);
                 // listview.setText("The best football player is : " + selectedItem);
                 String str = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference="+selectedItem.photoUrl+"&key=AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0";
-//                Intent httpIntent = new Intent(Intent.ACTION_VIEW);
-//                httpIntent.setData(Uri.parse(str));
-//                startActivity(httpIntent);
+                Intent httpIntent = new Intent(Intent.ACTION_VIEW);
+                httpIntent.setData(Uri.parse(str));
+                startActivity(httpIntent);
 // <<<<<<< tripupdate
                 Intent intent = new Intent(MenuActivity.this , PlaceImageActivity.class);
                 intent.putExtra("photoUrl", str);

@@ -29,11 +29,6 @@ public class TripHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_trip_history);
         listView = (ListView) findViewById(R.id.listview);
         ArrayList<trip_info> list = new ArrayList<trip_info>();
-        //  Toast.makeText(this, Integer.toString(list.size()), Toast.LENGTH_SHORT).show();
-//        TourismPlace u1 = new TourismPlace("icon","Delhi","near taj hotel","https://developers.google.com/places/web-service/supported_types#table2");
-//        TourismPlace u2 = new TourismPlace("icon","Mumbai","near taj hotel","https://developers.google.com/places/web-service/supported_types#table2");
-//        list.add(u1);
-//        list.add(u2);
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         String uid = auth.getUid().toString();

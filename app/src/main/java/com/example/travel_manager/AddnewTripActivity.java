@@ -11,6 +11,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+/*
+* Activity to add new trip to the database
+* */
+
 public class AddnewTripActivity extends AppCompatActivity {
     EditText place,review,cost;
     Button save;
