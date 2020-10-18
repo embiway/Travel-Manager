@@ -279,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 new Feature[]{Feature.fromJson(selectedCarmenFeature.toJson())}));
                     }
 
-                    // Move map camera to the selected location
+                     // Move map camera to the selected location
                     mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(
                             new CameraPosition.Builder()
                                     .target( latLing =new LatLng(((Point) selectedCarmenFeature.geometry()).latitude(),

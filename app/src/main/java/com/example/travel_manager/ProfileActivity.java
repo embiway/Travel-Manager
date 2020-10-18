@@ -10,7 +10,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -34,6 +36,7 @@ import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
+import com.squareup.picasso.Picasso;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -44,14 +47,22 @@ public class ProfileActivity extends AppCompatActivity {
     ChildEventListener childEventListener;
     FirebaseStorage firebaseStorage;
     StorageReference storageReference;
+    Uri image;
     String uid;
-    private static final int RC_PHOTO_PICKER =  2;
+    EditText Username,Description,Bio;
+    TextView Email;
+    private static final int RC_PHOTO_PICKER =  2,RC_PHOTO_PICKER1=3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         imageView = (ImageView)findViewById(R.id.ProfilePic);
+        Username = (EditText)findViewById(R.id.username);
+        Description = (EditText)findViewById(R.id.description);
+        Bio = (EditText)findViewById(R.id.Bio);
+        Email = (TextView)findViewById(R.id.email);
         auth = FirebaseAuth.getInstance();
+        Email.setText(auth.getCurrentUser().getEmail());
         firebaseDatabase = FirebaseDatabase.getInstance();
         uid = auth.getUid().toString();
         databaseReference = firebaseDatabase.getReference().child(uid+"photo");
@@ -61,6 +72,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+//                String x = dataSnapshot.getValue(String.class);
+//                Picasso.get().load(x).into(imageView);
+                if(dataSnapshot!=null) {
+                    profile p = dataSnapshot.getValue(profile.class);
+                    Picasso.get().load(p.PhotoUrl).into(imageView);
+                    Username.setText(p.name);
+                    Description.setText(p.description);
+                    Bio.setText(p.Bio);
+                }
             }
 
             @Override
@@ -84,41 +104,48 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
-
-    public  void  savePhoto(View view)
+    public   void  imageSelect(View view)
     {
-        imageView.setImageResource(R.drawable.ic_launcher_background);
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/jpeg");
         intent.putExtra(Intent.EXTRA_LOCAL_ONLY, true);
-        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER);
+        startActivityForResult(Intent.createChooser(intent, "Complete action using"), RC_PHOTO_PICKER1);
         Toast.makeText(this, "keep working", Toast.LENGTH_SHORT).show();
+    }
+    public  void  savePhoto(View view)
+    {
+        if(image!=null) {
+            StorageReference photoref = storageReference.child(uid);
+            photoref.putFile(image).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    Task<Uri> result = taskSnapshot.getMetadata().getReference().getDownloadUrl();
+                    result.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String imageUrl = uri.toString();
+                            //createNewPost(imageUrl);
+                            String x = imageUrl;
+                           Picasso.get().load(x).into(imageView);
+//                            databaseReference.push().setValue(x);
+                            profile p = new profile(Username.getText().toString(),Description.getText().toString(),Bio.getText().toString(),imageUrl);
+                             databaseReference.push().setValue(p);
+                        }
+                    });
+                }
+            });
+        }
 
     }
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK ) {
-//                 Uri image = data.getData();
-//                 StorageReference photoref = storageReference.child(uid);
-//                 photoref.putFile(image).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                     @Override
-//                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                        Task<Uri> result =  taskSnapshot.getMetadata().getReference().getDownloadUrl();
-//                         result.addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                             @Override
-//                             public void onSuccess(Uri uri) {
-//                                 String imageUrl = uri.toString();
-//                                 //createNewPost(imageUrl);
-//                                 String x = imageUrl;
-//
-//
-//                             }
-//                         });
-//                     }
-//                 });
-//
-//            }
-//        }
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+         if (requestCode == RC_PHOTO_PICKER1 && resultCode == RESULT_OK )
+        {
+           image = data.getData();
+            Picasso.get().load(image).into(imageView);
+        }
 
 
-}
+    }
+
+    }
