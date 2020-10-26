@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     tools:context=".LoginActivity"
-    android:background="@color/cardview_dark_background">
+    android:background="@drawable/grad">
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

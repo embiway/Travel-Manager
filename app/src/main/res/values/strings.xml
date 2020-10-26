@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Travel-Manager</string>
-    <string name="mapbox_access_token">pk.eyJ1IjoiZW1iaXdheSIsImEiOiJja2cwdDJjNjkwZzd5MnFvMnZybjVpbzdqIn0.0d2HQx4in0GuZTUWMpVrvw</string>
+    <string name="mapbox_access_token">sk.eyJ1IjoiZW1iaXdheSIsImEiOiJja2c3ZTYyYjUwNmlpMndsNDJmZ3Z0amozIn0.wAJb2UOCXY_p8g6gC8u2BA</string>
+    <string name="access_token" translatable="false">pk.eyJ1IjoiZW1iaXdheSIsImEiOiJja2cwc2lqYzcwZzNoMnlvMnl3cWVxcXBkIn0.rUiK8X49RYMaxD1nZUeTdg</string>
+    <string name="user_location_permission_explanation">This app needs location permissions to show its functionality.</string>
+    <string name="user_location_permission_not_granted">You didn\'t grant location permissions.</string>
     <string name="google_maps_API_Key">AIzaSyDP2SUMWv48KVcqTwQ096eO5AzuJ3UUuV0</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_navigation">NavigationActivity</string>
@@ -10,8 +13,8 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Home</string>
+       <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
+    <string name="twitterUsername">\@joeytribbiani</string>
 </resources>

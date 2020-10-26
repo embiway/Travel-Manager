@@ -4,25 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-      android:text="MyTrip"
-        android:id="@+id/mytrip"
-        android:layout_marginTop="10dp"/>
+    tools:context=".MainActivity"
+    android:background="#e0e0e0">
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="410dp"
-        android:layout_height="555dp"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="profiesetting"
-        android:id="@+id/save"
-        android:layout_marginTop="50dp"/>
 
 </RelativeLayout>

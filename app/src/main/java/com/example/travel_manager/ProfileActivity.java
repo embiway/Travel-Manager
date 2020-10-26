@@ -38,11 +38,14 @@ import com.mapbox.mapboxsdk.plugins.places.autocomplete.PlaceAutocomplete;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 import com.squareup.picasso.Picasso;
 
+import jp.wasabeef.picasso.transformations.CropCircleTransformation;
+
 // An Activity used to show profile pic and other details  , used firebase  storage and database to store details/
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView imageView;
     private FirebaseAuth auth;
+    TextView textView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     ChildEventListener childEventListener;
@@ -58,8 +61,9 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         imageView = (ImageView)findViewById(R.id.ProfilePic);
+        textView = (TextView)findViewById(R.id.tv_name);
         Username = (EditText)findViewById(R.id.username);
-        Description = (EditText)findViewById(R.id.description);
+        //Description = (EditText)findViewById(R.id.description);
         Bio = (EditText)findViewById(R.id.Bio);
         Email = (TextView)findViewById(R.id.email);
         auth = FirebaseAuth.getInstance();
@@ -77,10 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
 //                Picasso.get().load(x).into(imageView);
                 if(dataSnapshot!=null) {
                     profile p = dataSnapshot.getValue(profile.class);
-                    Picasso.get().load(p.PhotoUrl).into(imageView);
+                    Picasso.get().load(p.PhotoUrl).resize(450, 450).transform(new CropCircleTransformation()).into(imageView);
                     Username.setText(p.name);
-                    Description.setText(p.description);
+                    //Description.setText(p.description);
                     Bio.setText(p.Bio);
+                    textView.setText(p.name);
                 }
             }
 
@@ -115,6 +120,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public  void  savePhoto(View view) // saves photo back to firebase storage and generated  image url for stored image and stored back in database
     {
+        //Toast.makeText(this, "Working", Toast.LENGTH_SHORT).show();
         if(image!=null) {
             StorageReference photoref = storageReference.child(uid);
             photoref.putFile(image).addOnSuccessListener(this, new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -129,7 +135,7 @@ public class ProfileActivity extends AppCompatActivity {
                             String x = imageUrl;
                            Picasso.get().load(x).into(imageView);
 //                            databaseReference.push().setValue(x);
-                            profile p = new profile(Username.getText().toString(),Description.getText().toString(),Bio.getText().toString(),imageUrl);
+                            profile p = new profile(Username.getText().toString(),null,Bio.getText().toString(),imageUrl);
                              databaseReference.push().setValue(p);
                         }
                     });

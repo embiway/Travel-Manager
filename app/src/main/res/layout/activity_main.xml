@@ -32,8 +32,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@color/colorAccent"
-        android:enabled="false"
+        android:enabled="true"
         android:text="Start navigation"
+        android:onClick="startNavigation"
         android:textColor="@color/colorPrimary"
         mapbox:layout_constraintStart_toStartOf="parent"
         mapbox:layout_constraintTop_toTopOf="parent" />

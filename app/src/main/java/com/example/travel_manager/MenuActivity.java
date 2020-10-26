@@ -7,6 +7,9 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -38,8 +41,8 @@ public class MenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        mytrip=findViewById(R.id.mytrip);
-        ProfileSetting = findViewById(R.id.save);
+        //mytrip=findViewById(R.id.mytrip);
+        //ProfileSetting = findViewById(R.id.save);
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             USGS_REQUEST_URL = extras.getString("USGS_REQUEST_URL");
@@ -54,21 +57,6 @@ public class MenuActivity extends AppCompatActivity {
 
         TourismPlaceAdapter adapter = new TourismPlaceAdapter(this,list);
         listView.setAdapter(adapter);
-        mytrip.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MenuActivity.this,MyTrip.class);
-                intent.putExtra("list", list); //passing list
-                startActivity(intent);
-            }
-        });
-        ProfileSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(MenuActivity.this,ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
 
         //if we click on any of list item will br  redirected to placeimageactivity
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -84,6 +72,7 @@ public class MenuActivity extends AppCompatActivity {
                 intent.putExtra("photoUrl", str);
                 intent.putExtra("latitude",selectedItem.latitude);
                 intent.putExtra("longitude",selectedItem.longitude);
+                intent.putExtra("place",selectedItem.name);
                 startActivity(intent);
             }
 
@@ -248,5 +237,29 @@ public class MenuActivity extends AppCompatActivity {
             return tourismPlaces;
         }
     }
-
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.mytrip_menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.addtrip:
+                //startActivity(new Intent(MenuActivity.this,AddnewTripActivity.class));
+                AddActivityDialogClass cdd = new AddActivityDialogClass(MenuActivity.this);
+                cdd.show();
+                return true;
+            case R.id.viewtrip:
+                startActivity(new Intent(MenuActivity.this,TripHistoryActivity.class));
+                return true;
+            case R.id.sharetrip:
+                startActivity(new Intent(MenuActivity.this,ShareExperience.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

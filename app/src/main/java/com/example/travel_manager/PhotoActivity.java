@@ -4,16 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputFilter;
-import android.text.TextWatcher;
-import android.util.Log;
+import android.os.Message;
 import android.view.View;
-import android.widget.Button;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -32,12 +28,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
-// This activity is a chatting activity where user can send image and text to show off their  trip  experiences.
-public class ShareExperience extends AppCompatActivity {
+
+public class PhotoActivity extends AppCompatActivity {
 
     private ListView mMessageListView;
     private MessageAdapter mMessageAdapter;
@@ -47,6 +42,7 @@ public class ShareExperience extends AppCompatActivity {
     private ImageView mSendButton;
     private int RC_PHOTO_PICKER = 2;
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
+    String placeClicked;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     FirebaseAuth auth;
@@ -55,27 +51,26 @@ public class ShareExperience extends AppCompatActivity {
     String uid;
     StorageReference storageReference;
     private String mUsername;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_share_experience);
-        //mUsername = ANONYMOUS;
-
+        setContentView(R.layout.activity_photo);
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            placeClicked = extras.getString("place");
+        }
         auth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         uid = auth.getUid().toString();
-        databaseReference = firebaseDatabase.getReference().child("messages");
+        databaseReference = firebaseDatabase.getReference().child(uid+"tripimages"+ placeClicked);
         firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference().child("photomessage");
+        storageReference = firebaseStorage.getReference().child("TripImages");
         // Initialize references to views
         mProgressBar = (ProgressBar) findViewById(R.id.progressBar);
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mPhotoPickerButton = (ImageButton) findViewById(R.id.photoPickerButton);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
         mSendButton = (ImageView) findViewById(R.id.sendButton);
-
-        // Initialize message ListView and its adapter
         List<Messages> messages = new ArrayList<>();
         mMessageAdapter = new MessageAdapter(this, R.layout.item_message, messages);
         mMessageListView.setAdapter(mMessageAdapter);
@@ -96,43 +91,15 @@ public class ShareExperience extends AppCompatActivity {
 
             }
         });
-
-        // Enable Send button when there's text to send
-        mMessageEditText.addTextChangedListener(new TextWatcher() {
+        mMessageListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Messages selectedItem = (Messages) parent.getItemAtPosition(position);
+                Toast.makeText(PhotoActivity.this, "Cool", Toast.LENGTH_SHORT).show();
             }
 
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (charSequence.toString().trim().length() > 0) {
-                    mSendButton.setEnabled(true);
-                } else {
-                    mSendButton.setEnabled(false);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-            }
         });
-        mMessageEditText.setFilters(new InputFilter[]{new InputFilter.LengthFilter(DEFAULT_MSG_LENGTH_LIMIT)});
 
-        // Send button sends a message and clears the EditText
-        mSendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // TODO: Send messages on click
-
-                String text = mMessageEditText.getText().toString();
-                mUsername = auth.getCurrentUser().getEmail();
-                Messages mMessage = new Messages(text, mUsername, null);
-                Log.i("dwfeewrferw", text);
-                databaseReference.push().setValue(mMessage);
-                // Clear input box
-                mMessageEditText.setText("");
-            }
-        });
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
@@ -154,14 +121,13 @@ public class ShareExperience extends AppCompatActivity {
             public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-    }
 
+    }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_PHOTO_PICKER && resultCode == RESULT_OK) {
@@ -177,7 +143,7 @@ public class ShareExperience extends AppCompatActivity {
                             public void onSuccess(Uri uri) {
                                 String imageUrl = uri.toString();
                                 mUsername = auth.getCurrentUser().getEmail();
-                                Messages mMessage = new Messages(null, mUsername, imageUrl);
+                                Messages mMessage = new Messages(null, null, imageUrl);
                                 databaseReference.push().setValue(mMessage);
 
                                 //createNewPost(imageUrl);
