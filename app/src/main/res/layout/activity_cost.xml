@@ -11,17 +11,18 @@
     <LinearLayout   android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout" android:orientation="horizontal" android:layout_alignParentStart="true" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true">
 
         <ImageView
+            android:id="@+id/additem"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="@drawable/grad"
-            android:src="@drawable/ic_baseline_shopping_cart"
-            android:id="@+id/additem" />
+            android:onClick="AddItem"
+            android:src="@drawable/ic_baseline_shopping_cart" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/totalcost"
         android:gravity="right"
-        android:text="Cost:500"
+        android:text="Cost:0"
         android:textColor="@android:color/holo_red_light"
         android:textSize="30dp"
         android:textStyle="bold" />

@@ -9,7 +9,5 @@ public class Cost_info {
         this.Cost = cost;
     }
     public Cost_info(){
-        this.placeName = "placeName";
-        this.Cost = "cost";
     }
 }

@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:background="@android:color/white"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:layout_width="5dp"
+        android:layout_height="80dp"
+        android:src="@drawable/grad"
+        android:layout_gravity="left"
+        />
+    <TextView
+        android:id="@+id/PlaceName"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="#000"
+        android:padding="16dp"
+        android:text="Name"
+        android:background="@android:color/white"
+        android:layout_width="1dp"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/cost"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="cost"
+        android:layout_width="1dp" />
+
+</LinearLayout>

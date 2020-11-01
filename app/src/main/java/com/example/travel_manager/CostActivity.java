@@ -48,6 +48,7 @@ public class CostActivity extends AppCompatActivity {
         }
         listView = (ListView) findViewById(R.id.listview);
         imageView = (ImageView)findViewById(R.id.additem);
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,8 +68,8 @@ public class CostActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         String uid = auth.getUid().toString();
         databaseReference = firebaseDatabase.getReference().child(uid+placeClicked+"cost");
-        Cost_info u = new Cost_info("placeX","costX");
-         list.add(u);
+        //Cost_info u = new Cost_info("placeX","costX");
+        // list.add(u);
        Cost_infoAdapter adapter = new Cost_infoAdapter(this,list);
         listView.setAdapter(adapter);
         //adapter.add(u);
@@ -79,7 +80,12 @@ public class CostActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Toast.makeText(CostActivity.this, "fedw", Toast.LENGTH_SHORT).show();
                 Context context = CostActivity.this;
-
+                AddCostDialog cdd = new AddCostDialog(CostActivity.this);
+                SharedPreferences sharedPref = getSharedPreferences("myPrefs", Context.MODE_PRIVATE );
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("placeClicked", placeClicked);
+                editor.commit();
+                cdd.show();
             }
         });
         databaseReference.addChildEventListener(new ChildEventListener() {
