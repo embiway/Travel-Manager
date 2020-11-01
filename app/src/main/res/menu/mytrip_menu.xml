@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/addtrip"
+        android:icon="@drawable/ic_settings"
+        android:title="AddTrip" />
+    <item android:id="@+id/viewtrip"
+        android:icon="@drawable/ic_travel_24"
+        android:title="PreviousTrip" />
+    <item android:id="@+id/sharetrip"
+        android:icon="@drawable/ic_travel_24"
+        android:title="ShareTrip" />
+</menu>

@@ -1,6 +1,5 @@
 package com.example.travel_manager;
 
-
 // object of messages class  is shown in shareExperienceActivity as image or text
 public class Messages {
 

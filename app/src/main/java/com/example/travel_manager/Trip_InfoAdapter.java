@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.location.places.Place;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

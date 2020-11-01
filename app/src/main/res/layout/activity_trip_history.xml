@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:orientation="vertical"
+    android:background="#e0e0e0">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalcost"
+        android:gravity="right"
+        android:text="Cost:500"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="30dp"
+        android:visibility="gone"
+        android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listview"
@@ -13,4 +26,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="1dp" />
 
-</RelativeLayout>
+</LinearLayout>
+
+

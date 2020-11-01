@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -36,7 +37,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 // This activity is a chatting activity where user can send image and text to show off their  trip  experiences.
-
 public class ShareExperience extends AppCompatActivity {
 
     private ListView mMessageListView;
@@ -44,7 +44,7 @@ public class ShareExperience extends AppCompatActivity {
     private ProgressBar mProgressBar;
     private ImageButton mPhotoPickerButton;
     private EditText mMessageEditText;
-    private Button mSendButton;
+    private ImageView mSendButton;
     private int RC_PHOTO_PICKER = 2;
     public static final int DEFAULT_MSG_LENGTH_LIMIT = 1000;
     FirebaseDatabase firebaseDatabase;
@@ -73,7 +73,7 @@ public class ShareExperience extends AppCompatActivity {
         mMessageListView = (ListView) findViewById(R.id.messageListView);
         mPhotoPickerButton = (ImageButton) findViewById(R.id.photoPickerButton);
         mMessageEditText = (EditText) findViewById(R.id.messageEditText);
-        mSendButton = (Button) findViewById(R.id.sendButton);
+        mSendButton = (ImageView) findViewById(R.id.sendButton);
 
         // Initialize message ListView and its adapter
         List<Messages> messages = new ArrayList<>();

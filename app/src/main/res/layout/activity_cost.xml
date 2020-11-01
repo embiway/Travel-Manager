@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CostActivity"
+    android:orientation="vertical"
+    android:background="#e0e0e0">
+
+    <LinearLayout   android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout" android:orientation="horizontal" android:layout_alignParentStart="true" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:id="@+id/additem"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/grad"
+            android:onClick="AddItem"
+            android:src="@drawable/ic_baseline_shopping_cart" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalcost"
+        android:gravity="right"
+        android:text="Cost:0"
+        android:textColor="@android:color/holo_red_light"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="410dp"
+        android:layout_height="555dp"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
+
+
+</LinearLayout>
+
+
